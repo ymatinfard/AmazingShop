@@ -28,5 +28,9 @@ gradlePlugin {
             id = "amazingshop.jvm.library"
             implementationClass = "JvmLibraryConventionPlugin"
         }
+        register("androidLibrary") {
+            id = "amazingshop.android.library"
+            implementationClass = "AndroidLibraryConventionPlugin"
+        }
     }
 }

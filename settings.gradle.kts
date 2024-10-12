@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "AmazingShop"
 include(":app")
 include(":core:model")
+include(":build-logic:convention")

@@ -3,8 +3,8 @@ package com.matin.amazingshop.core.network.model
 import com.google.gson.annotations.SerializedName
 
 data class NetworkProductsData(
-    @SerializedName("title") var title: String? = null,
-    @SerializedName("currency") var currency: String? = null,
-    @SerializedName("banner") var banner: NetworkBanner? = NetworkBanner(),
-    @SerializedName("items") var items: ArrayList<NetworkItems> = arrayListOf()
+    @SerializedName("title") val title: String? = null,
+    @SerializedName("currency") val currency: String? = null,
+    @SerializedName("banner") val banner: NetworkBanner? = NetworkBanner(),
+    @SerializedName("items") val items: ArrayList<NetworkItems>? = arrayListOf()
 )

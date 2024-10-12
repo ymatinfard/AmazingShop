@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 data class NetworkItems(
     @SerializedName("id") var id: String? = null,
     @SerializedName("sku") var sku: String? = null,
-    @SerializedName("image") var image: NetworkImage? = NetworkImage(),
+    @SerializedName("image") var image: NetworkImage = NetworkImage(),
     @SerializedName("brand") var brand: String? = null,
     @SerializedName("name") var name: String? = null,
     @SerializedName("price") var price: Double? = null,

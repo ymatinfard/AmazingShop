@@ -4,5 +4,5 @@ data class ProductsData(
     val title: String,
     val currency: String,
     val banner: Banner,
-    val items: ArrayList<Items>
+    val items: List<Items>
 )

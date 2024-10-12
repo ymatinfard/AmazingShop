@@ -32,5 +32,9 @@ gradlePlugin {
             id = "amazingshop.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidHilt") {
+            id = "amazingshop.android.hilt"
+            implementationClass = "AndroidHiltConventionPlugin"
+        }
     }
 }

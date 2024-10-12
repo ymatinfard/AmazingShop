@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.amazingshop.android.library)
+    alias(libs.plugins.amazingshop.android.hilt)
 }
 
 android {

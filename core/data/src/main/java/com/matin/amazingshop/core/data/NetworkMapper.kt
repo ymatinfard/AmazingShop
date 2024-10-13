@@ -6,10 +6,10 @@ import com.matin.amazingshop.core.model.Items
 import com.matin.amazingshop.core.model.ProductsData
 import com.matin.amazingshop.core.network.model.NetworkBanner
 import com.matin.amazingshop.core.network.model.NetworkImage
-import com.matin.amazingshop.core.network.model.NetworkItems
-import com.matin.amazingshop.core.network.model.NetworkProductsData
+import com.matin.amazingshop.core.network.model.NetworkItem
+import com.matin.amazingshop.core.network.model.NetworkCatalog
 
-fun NetworkProductsData.toDomain(): ProductsData {
+fun NetworkCatalog.toDomain(): ProductsData {
     return ProductsData(
         title = title.orEmpty(),
         currency = currency.orEmpty(),
@@ -24,7 +24,7 @@ fun NetworkBanner.toDomain(): Banner {
     )
 }
 
-fun NetworkItems.toDomain(): Items {
+fun NetworkItem.toDomain(): Items {
     return Items(
         id = id.orEmpty(),
         sku = sku.orEmpty(),

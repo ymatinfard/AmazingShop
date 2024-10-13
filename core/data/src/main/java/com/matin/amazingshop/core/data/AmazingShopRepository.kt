@@ -1,8 +1,8 @@
 package com.matin.amazingshop.core.data
 
-import com.matin.amazingshop.core.common.Result
 import com.matin.amazingshop.core.model.ProductsData
+import kotlinx.coroutines.flow.Flow
 
 interface AmazingShopRepository {
-    suspend fun getProducts(): Result<ProductsData>
+    fun getCatalog(): Flow<ProductsData>
 }

@@ -9,7 +9,6 @@ android {
 
 dependencies {
     implementation(projects.core.common)
-    implementation(libs.androidx.core.ktx)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
     implementation(libs.kotlinx.serialization.json)

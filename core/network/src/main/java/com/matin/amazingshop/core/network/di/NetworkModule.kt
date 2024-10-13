@@ -12,6 +12,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
+
     @Provides
     @Singleton
     fun provideRetrofit(): AmazingShopApi {

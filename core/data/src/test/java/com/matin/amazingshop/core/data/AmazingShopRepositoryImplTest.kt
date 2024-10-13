@@ -1,11 +1,11 @@
 package com.matin.amazingshop.core.data
 
-import com.matin.amazingshop.core.common.Result
 import com.matin.amazingshop.core.data.testdouble.TestAmazingShopApi
 import com.matin.amazingshop.core.model.Banner
 import com.matin.amazingshop.core.model.Image
 import com.matin.amazingshop.core.model.Items
 import com.matin.amazingshop.core.model.ProductsData
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
@@ -24,9 +24,9 @@ class AmazingShopRepositoryImplTest {
     }
 
     @Test
-    fun getProducts_returns_product_list_from_server() = runTest(testDispatcher) {
-        val result = repository.getProducts()
-        assertEquals(Result.Success(productsData), result)
+    fun getCatalog_returns_product_list_from_server() = runTest(testDispatcher) {
+        val result = repository.getCatalog().first()
+        assertEquals(productsData, result)
     }
 
     private val productsData = ProductsData(

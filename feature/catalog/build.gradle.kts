@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.amazingshop.android.feature)
+    alias(libs.plugins.amazingshop.android.library.compose)
 }
 
 android {

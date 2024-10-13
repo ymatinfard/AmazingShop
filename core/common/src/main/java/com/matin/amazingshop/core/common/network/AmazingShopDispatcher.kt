@@ -1,4 +1,4 @@
-package com.matin.happystore.core.common.network
+package com.matin.amazingshop.core.common.network
 
 import javax.inject.Qualifier
 import kotlin.annotation.AnnotationRetention.RUNTIME

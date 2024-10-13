@@ -1,7 +1,5 @@
-package com.matin.amazingshop.core.data.dipatchers
+package com.matin.amazingshop.core.common.network
 
-import com.matin.happystore.core.common.network.AmazingShopDispatcher
-import com.matin.happystore.core.common.network.Dispatcher
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

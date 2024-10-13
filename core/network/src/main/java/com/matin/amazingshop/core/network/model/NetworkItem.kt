@@ -2,7 +2,7 @@ package com.matin.amazingshop.core.network.model
 
 import com.google.gson.annotations.SerializedName
 
-data class NetworkItems(
+data class NetworkItem(
     @SerializedName("id") var id: String? = null,
     @SerializedName("sku") var sku: String? = null,
     @SerializedName("image") var image: NetworkImage = NetworkImage(),

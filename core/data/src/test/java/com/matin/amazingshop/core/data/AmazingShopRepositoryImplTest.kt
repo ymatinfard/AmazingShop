@@ -1,5 +1,6 @@
 package com.matin.amazingshop.core.data
 
+import com.matin.amazingshop.core.common.Result
 import com.matin.amazingshop.core.data.testdouble.TestAmazingShopApi
 import com.matin.amazingshop.core.model.Banner
 import com.matin.amazingshop.core.model.Image
@@ -25,7 +26,7 @@ class AmazingShopRepositoryImplTest {
     @Test
     fun getProducts_returns_product_list_from_server() = runTest(testDispatcher) {
         val result = repository.getProducts()
-        assertEquals(productsData, result)
+        assertEquals(Result.Success(productsData), result)
     }
 
     private val productsData = ProductsData(

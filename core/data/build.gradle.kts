@@ -11,4 +11,5 @@ dependencies {
     implementation(projects.core.model)
     implementation(projects.core.network)
     implementation(projects.core.common)
+    implementation(libs.kotlinx.coroutines.test)
 }

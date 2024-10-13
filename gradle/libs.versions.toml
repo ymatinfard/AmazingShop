@@ -20,6 +20,7 @@ ksp = "2.0.21-1.0.25"
 kotlinxCoroutinesAndroid = "1.7.3"
 androidxHiltNavigationCompose = "1.2.0"
 androidxLifecycle = "2.7.0"
+androidxComposeCompiler = "1.5.12"
 
 
 [libraries]
@@ -70,5 +71,6 @@ amazingshop-android-library = { id = "amazingshop.android.library", version = "u
 amazingshop-android-hilt = { id = "amazingshop.android.hilt", version = "unspecified" }
 amazingshop-android-application = { id = "amazingshop.android.application", version = "unspecified" }
 amazingshop-android-feature = { id = "amazingshop.android.feature", version = "unspecified" }
+amazingshop-android-application-compose = { id = "amazingshop.android.application.compose", version = "unspecified" }
 
 

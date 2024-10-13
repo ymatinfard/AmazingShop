@@ -42,6 +42,7 @@ dependencies {
 
     implementation(projects.core.model)
     implementation(projects.core.data)
+    implementation(projects.feature.catalog)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

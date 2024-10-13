@@ -40,5 +40,9 @@ gradlePlugin {
             id = "amazingshop.android.application"
             implementationClass = "AndroidApplicationConventionPlugin"
         }
+        register("androidFeature") {
+            id = "amazingshop.android.feature"
+            implementationClass = "AndroidFeatureConventionPlugin"
+        }
     }
 }

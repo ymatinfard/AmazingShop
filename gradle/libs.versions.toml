@@ -18,6 +18,8 @@ kotlinxSerializationJson = "1.6.3"
 hilt = "2.50"
 ksp = "2.0.21-1.0.25"
 kotlinxCoroutinesAndroid = "1.7.3"
+androidxHiltNavigationCompose = "1.2.0"
+androidxLifecycle = "2.7.0"
 
 
 [libraries]
@@ -48,6 +50,10 @@ hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref
 hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 kotlinx-coroutines-test = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-test", version.ref = "kotlinxCoroutinesAndroid" }
+androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navigation-compose", version.ref = "androidxHiltNavigationCompose" }
+androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-viewModelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "androidxLifecycle" }
+androidx-lifecycle-runtimeTesting = { group = "androidx.lifecycle", name = "lifecycle-runtime-testing", version.ref = "androidxLifecycle" }
 
 
 [plugins]
@@ -63,5 +69,6 @@ amazingshop-jvm-library = { id = "amazingshop.jvm.library", version = "unspecifi
 amazingshop-android-library = { id = "amazingshop.android.library", version = "unspecified" }
 amazingshop-android-hilt = { id = "amazingshop.android.hilt", version = "unspecified" }
 amazingshop-android-application = { id = "amazingshop.android.application", version = "unspecified" }
+amazingshop-android-feature = { id = "amazingshop.android.feature", version = "unspecified" }
 
 

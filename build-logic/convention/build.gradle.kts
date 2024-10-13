@@ -36,5 +36,9 @@ gradlePlugin {
             id = "amazingshop.android.hilt"
             implementationClass = "AndroidHiltConventionPlugin"
         }
+        register("androidApplication") {
+            id = "amazingshop.android.application"
+            implementationClass = "AndroidApplicationConventionPlugin"
+        }
     }
 }

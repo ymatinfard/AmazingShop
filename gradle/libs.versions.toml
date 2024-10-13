@@ -60,7 +60,8 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 
 amazingshop-jvm-library = { id = "amazingshop.jvm.library", version = "unspecified" }
-amazingshop-android-library = { id = "amazingshop.android.library", version = "unspecified"}
-amazingshop-android-hilt = { id = "amazingshop.android.hilt", version = "unspecified"}
+amazingshop-android-library = { id = "amazingshop.android.library", version = "unspecified" }
+amazingshop-android-hilt = { id = "amazingshop.android.hilt", version = "unspecified" }
+amazingshop-android-application = { id = "amazingshop.android.application", version = "unspecified" }
 
 

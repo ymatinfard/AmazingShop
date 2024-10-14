@@ -2,7 +2,7 @@ package com.matin.amazingshop.core.data
 
 import com.matin.amazingshop.core.model.Banner
 import com.matin.amazingshop.core.model.Image
-import com.matin.amazingshop.core.model.Items
+import com.matin.amazingshop.core.model.Item
 import com.matin.amazingshop.core.model.ProductsData
 import com.matin.amazingshop.core.network.model.NetworkBanner
 import com.matin.amazingshop.core.network.model.NetworkImage
@@ -24,8 +24,8 @@ fun NetworkBanner.toDomain(): Banner {
     )
 }
 
-fun NetworkItem.toDomain(): Items {
-    return Items(
+fun NetworkItem.toDomain(): Item {
+    return Item(
         id = id.orEmpty(),
         sku = sku.orEmpty(),
         image = image.toDomain(),

@@ -2,7 +2,7 @@ package com.matin.amazingshop.core.model
 
 import java.math.BigDecimal
 
-data class Items(
+data class Item(
     val id: String,
     val sku: String,
     val image: Image,

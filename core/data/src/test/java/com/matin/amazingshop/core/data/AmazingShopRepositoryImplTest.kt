@@ -3,7 +3,7 @@ package com.matin.amazingshop.core.data
 import com.matin.amazingshop.core.data.testdouble.TestAmazingShopApi
 import com.matin.amazingshop.core.model.Banner
 import com.matin.amazingshop.core.model.Image
-import com.matin.amazingshop.core.model.Items
+import com.matin.amazingshop.core.model.Item
 import com.matin.amazingshop.core.model.ProductsData
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -34,7 +34,7 @@ class AmazingShopRepositoryImplTest {
         currency = "euro",
         banner = Banner("banner title", "banner message"),
         items = arrayListOf(
-            Items(
+            Item(
                 id = "1",
                 name = "Item name",
                 sku = "sku",
@@ -47,7 +47,7 @@ class AmazingShopRepositoryImplTest {
                 price = "9.99".toBigDecimal(),
                 badges = arrayListOf("badge1", "badge2"),
             ),
-            Items(
+            Item(
                 id = "2",
                 name = "Item name",
                 sku = "sku",
@@ -60,7 +60,7 @@ class AmazingShopRepositoryImplTest {
                 price = "10.99".toBigDecimal(),
                 badges = arrayListOf("badge1", "badge2"),
             ),
-            Items(
+            Item(
                 id = "3",
                 name = "Item name",
                 sku = "sku",
@@ -73,7 +73,7 @@ class AmazingShopRepositoryImplTest {
                 price = "11.99".toBigDecimal(),
                 badges = arrayListOf("badge1", "badge2"),
             ),
-            Items(
+            Item(
                 id = "4",
                 name = "Item name",
                 sku = "sku",

@@ -29,7 +29,6 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -37,6 +36,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -48,13 +48,13 @@ import com.matin.amazingshop.core.model.Item
 
 @Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-fun CatalogScreen(viewModel: CatalogScreenViewModel) {
+fun CatalogScreen(viewModel: CatalogScreenViewModel, onWishlistClick: () -> Unit = {}) {
     val catalogState = viewModel.catalogUiState.collectAsStateWithLifecycle()
     Column(
         modifier = Modifier
             .fillMaxSize()
     ) {
-        TopBar()
+        TopBar("NEW IN", Icons.Default.Favorite, onWishlistClick)
         CatalogScreenContent(catalogState.value) { favoriteItem ->
             if (favoriteItem.isInWishlist) {
                 viewModel.removeFromWishList(favoriteItem)
@@ -66,7 +66,7 @@ fun CatalogScreen(viewModel: CatalogScreenViewModel) {
 }
 
 @Composable
-fun TopBar() {
+fun TopBar(title: String, icon: ImageVector, onAction: () -> Unit = {}) {
     ElevatedCard(
         onClick = { /*TODO*/ },
         shape = RoundedCornerShape(0),
@@ -82,11 +82,11 @@ fun TopBar() {
                     .padding(end = 16.dp),
                 horizontalArrangement = Arrangement.End
             ) {
-                Icon(imageVector = Icons.Default.Favorite, contentDescription = null)
+                Icon(modifier = Modifier.clickable { onAction() }, imageVector = icon, contentDescription = null)
             }
 
             Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-                Text(text = "NEW IN")
+                Text(text = title)
             }
         }
     }

@@ -10,7 +10,7 @@ import com.matin.amazingshop.feature.wishlist.WishlistViewModel
 
 const val WISHLIST_ROUTE = "whishlist_route"
 
-fun NavController.navigateToWishlist(navOptions: NavOptions) = navigate(WISHLIST_ROUTE, navOptions)
+fun NavController.navigateToWishlist() = navigate(WISHLIST_ROUTE)
 
 fun NavGraphBuilder.wishlistScreen() {
     return composable(WISHLIST_ROUTE) {

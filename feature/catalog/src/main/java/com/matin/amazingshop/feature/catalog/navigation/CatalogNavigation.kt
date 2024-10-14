@@ -12,9 +12,9 @@ const val CATALOG_ROUTE = "catalog_route"
 
 fun NavController.navigateToCatalog(navOptions: NavOptions) = navigate(CATALOG_ROUTE, navOptions)
 
-fun NavGraphBuilder.catalogScreen() {
+fun NavGraphBuilder.catalogScreen(onWishlistClick: () -> Unit) {
     return composable(CATALOG_ROUTE) {
         val viewModel = hiltViewModel<CatalogScreenViewModel>()
-        CatalogScreen(viewModel)
+        CatalogScreen(viewModel, onWishlistClick)
     }
 }

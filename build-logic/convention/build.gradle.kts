@@ -20,6 +20,8 @@ dependencies {
     compileOnly(libs.android.gradlePlugin)
     compileOnly(libs.android.tools.common)
     compileOnly(libs.kotlin.gradlePlugin)
+    compileOnly(libs.room.gradlePlugin)
+    compileOnly(libs.ksp.gradlePlugin)
 }
 
 gradlePlugin {
@@ -51,6 +53,10 @@ gradlePlugin {
         register("androidLibraryCompose") {
             id = "amazingshop.android.library.compose"
             implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+        register("androidRoom") {
+            id = "amazingshop.android.room"
+            implementationClass = "AndroidRoomConventionPlugin"
         }
     }
 }

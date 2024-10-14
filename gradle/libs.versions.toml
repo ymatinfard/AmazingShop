@@ -85,5 +85,6 @@ amazingshop-android-application = { id = "amazingshop.android.application", vers
 amazingshop-android-feature = { id = "amazingshop.android.feature", version = "unspecified" }
 amazingshop-android-application-compose = { id = "amazingshop.android.application.compose", version = "unspecified" }
 amazingshop-android-library-compose = { id = "amazingshop.android.library.compose", version = "unspecified" }
+amazingshop-android-room = { id = "amazingshop.android.room", version = "unspecified" }
 
 

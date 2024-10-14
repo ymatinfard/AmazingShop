@@ -9,5 +9,6 @@ data class Item(
     val brand: String,
     val name: String,
     val price: BigDecimal,
-    val badges: ArrayList<String>
+    val badges: ArrayList<String>,
+    var isInWishlist: Boolean
 )

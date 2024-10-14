@@ -27,9 +27,9 @@ import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.FavoriteBorder
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -46,18 +46,23 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
 import com.matin.amazingshop.core.model.Item
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 fun CatalogScreen(viewModel: CatalogScreenViewModel) {
     val catalogState = viewModel.catalogUiState.collectAsStateWithLifecycle()
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-        ) {
-            TopBar()
-            CatalogScreenContent(catalogState.value) { favItemId -> }
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        TopBar()
+        CatalogScreenContent(catalogState.value) { favoriteItem ->
+            if (favoriteItem.isInWishlist) {
+                viewModel.removeFromWishList(favoriteItem)
+            } else {
+                viewModel.addToWishList(favoriteItem)
+            }
         }
+    }
 }
 
 @Composable
@@ -88,7 +93,7 @@ fun TopBar() {
 }
 
 @Composable
-fun CatalogScreenContent(catalog: CatalogUiState, onFavoriteItemClick: (String) -> Unit) {
+fun CatalogScreenContent(catalog: CatalogUiState, onFavoriteItemClick: (Item) -> Unit) {
     when (catalog) {
         is CatalogUiState.Loading -> Text(text = "Loading...")
         is CatalogUiState.Success -> {
@@ -104,7 +109,7 @@ fun CatalogScreenContent(catalog: CatalogUiState, onFavoriteItemClick: (String) 
 @Composable
 private fun Catalog(
     catalog: CatalogUiState.Success,
-    onFavoriteItemClick: (String) -> Unit
+    onFavoriteItemClick: (Item) -> Unit
 ) {
     BoxWithConstraints(modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
         LazyVerticalGrid(
@@ -124,7 +129,7 @@ private fun Catalog(
 fun CatalogItem(
     item: Item,
     maxHeight: Dp,
-    onFavoriteItemClick: (String) -> Unit
+    onFavoriteItemClick: (Item) -> Unit
 ) {
     Column(modifier = Modifier.height(maxHeight / 2)) {
         ElevatedCard(
@@ -149,7 +154,7 @@ fun CatalogItem(
                             ItemBadge(text = it)
                         }
                     }
-                    FavoriteIcon(id = item.id, isFavorite = false, onFavoriteItemClick)
+                    FavoriteIcon(item, onFavoriteItemClick)
                 }
 
                 AsyncImage(
@@ -182,12 +187,11 @@ fun CatalogItem(
 
 @Composable
 fun FavoriteIcon(
-    id: String,
-    isFavorite: Boolean,
-    onFavoriteClick: (String) -> Unit,
+    item: Item,
+    onFavoriteClick: (Item) -> Unit,
 ) {
     Image(
-        imageVector = if (isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
+        imageVector = if (item.isInWishlist) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
         contentDescription = null,
         modifier = Modifier
             .clip(
@@ -195,8 +199,8 @@ fun FavoriteIcon(
             )
             .background(color = MaterialTheme.colorScheme.outlineVariant)
             .padding(3.dp)
-            .clickable { onFavoriteClick(id) },
-        colorFilter = ColorFilter.tint(if (isFavorite) Color.Red else Color.White),
+            .clickable { onFavoriteClick(item) },
+        colorFilter = ColorFilter.tint(if (item.isInWishlist) Color.Red else Color.White),
     )
 }
 

@@ -22,5 +22,6 @@ fun WishEntity.toDomain(): Item {
         price = price,
         sku = "",
         badges = arrayListOf(),
+        isInWishlist = true
     )
 }

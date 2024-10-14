@@ -32,7 +32,8 @@ fun NetworkItem.toDomain(): Item {
         brand = brand.orEmpty(),
         name = name.orEmpty(),
         badges = badges,
-        price = price?.toBigDecimal() ?: 0.toBigDecimal()
+        price = price?.toBigDecimal() ?: 0.toBigDecimal(),
+        isInWishlist = false
     )
 }
 

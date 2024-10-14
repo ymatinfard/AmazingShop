@@ -12,7 +12,7 @@ import com.matin.amazingshop.feature.wishlist.navigation.wishlistScreen
 @Composable
 fun AmazingShopNavHost() {
     val navController: NavHostController = rememberNavController()
-    NavHost(navController = navController, startDestination = WISHLIST_ROUTE) {
+    NavHost(navController = navController, startDestination = CATALOG_ROUTE) {
         catalogScreen()
         wishlistScreen()
     }

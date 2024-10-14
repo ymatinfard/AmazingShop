@@ -10,11 +10,11 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface WishlistDao {
     @Query("SELECT * FROM tbl_wishlist")
-    fun getWishlist(): Flow<List<WishlistEntity>>
+    fun getWishlist(): Flow<List<WishEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addToWishlist(wishlistEntity: WishlistEntity)
+    suspend fun addToWishlist(wishEntity: WishEntity)
 
     @Delete
-    suspend fun removeFromWishlist(wishlistEntity: WishlistEntity)
+    suspend fun removeFromWishlist(wishEntity: WishEntity)
 }

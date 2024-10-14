@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.matin.amazingshop.core.common.Result
 import com.matin.amazingshop.core.common.asResult
 import com.matin.amazingshop.core.data.AmazingShopRepository
-import com.matin.amazingshop.core.model.ProductsData
+import com.matin.amazingshop.core.model.Catalog
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -32,7 +32,7 @@ class CatalogScreenViewModel @Inject constructor(private val repository: Amazing
 }
 
 sealed interface CatalogUiState {
-    data class Success(val data: ProductsData) : CatalogUiState
+    data class Success(val data: Catalog) : CatalogUiState
     data class Error(val message: String) : CatalogUiState
     data object Loading : CatalogUiState
 }

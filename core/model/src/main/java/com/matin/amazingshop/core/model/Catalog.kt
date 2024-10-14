@@ -1,6 +1,6 @@
 package com.matin.amazingshop.core.model
 
-data class ProductsData(
+data class Catalog(
     val title: String,
     val currency: String,
     val banner: Banner,

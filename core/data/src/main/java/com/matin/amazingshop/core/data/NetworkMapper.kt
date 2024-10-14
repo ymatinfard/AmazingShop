@@ -1,16 +1,16 @@
 package com.matin.amazingshop.core.data
 
 import com.matin.amazingshop.core.model.Banner
+import com.matin.amazingshop.core.model.Catalog
 import com.matin.amazingshop.core.model.Image
 import com.matin.amazingshop.core.model.Item
-import com.matin.amazingshop.core.model.ProductsData
 import com.matin.amazingshop.core.network.model.NetworkBanner
+import com.matin.amazingshop.core.network.model.NetworkCatalog
 import com.matin.amazingshop.core.network.model.NetworkImage
 import com.matin.amazingshop.core.network.model.NetworkItem
-import com.matin.amazingshop.core.network.model.NetworkCatalog
 
-fun NetworkCatalog.toDomain(): ProductsData {
-    return ProductsData(
+fun NetworkCatalog.toDomain(): Catalog {
+    return Catalog(
         title = title.orEmpty(),
         currency = currency.orEmpty(),
         banner = banner?.toDomain() ?: Banner("", ""),

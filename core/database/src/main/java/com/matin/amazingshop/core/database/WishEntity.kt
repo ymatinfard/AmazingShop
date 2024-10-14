@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 import java.math.BigDecimal
 
 @Entity("tbl_wishlist")
-class WishlistEntity(
+class WishEntity(
     @PrimaryKey
     val id: String,
     val image: String,

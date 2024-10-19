@@ -12,9 +12,9 @@ const val WISHLIST_ROUTE = "whishlist_route"
 
 fun NavController.navigateToWishlist() = navigate(WISHLIST_ROUTE)
 
-fun NavGraphBuilder.wishlistScreen() {
+fun NavGraphBuilder.wishlistScreen(onCloseClick: () -> Unit) {
     return composable(WISHLIST_ROUTE) {
         val viewModel = hiltViewModel<WishlistViewModel>()
-        WishlistScreen(viewModel)
+        WishlistScreen(viewModel, onCloseClick)
     }
 }

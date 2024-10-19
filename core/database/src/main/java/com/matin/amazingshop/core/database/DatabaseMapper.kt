@@ -3,17 +3,19 @@ package com.matin.amazingshop.core.database
 import com.matin.amazingshop.core.model.Image
 import com.matin.amazingshop.core.model.Item
 
-fun Item.toEntity(): WishEntity {
-    return WishEntity(
+fun Item.toEntity(): ItemStatusEntity {
+    return ItemStatusEntity(
         id = id,
         name = name,
         brand = brand,
         image = image.url,
         price = price,
+        isInWishlist = isInWishlist,
+        isInCart = isInCart
     )
 }
 
-fun WishEntity.toDomain(): Item {
+fun ItemStatusEntity.toDomain(): Item {
     return Item(
         id = id,
         name = name,
@@ -22,6 +24,7 @@ fun WishEntity.toDomain(): Item {
         price = price,
         sku = "",
         badges = arrayListOf(),
-        isInWishlist = true
+        isInWishlist = isInWishlist,
+        isInCart = isInCart
     )
 }

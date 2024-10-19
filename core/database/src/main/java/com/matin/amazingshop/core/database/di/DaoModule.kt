@@ -1,7 +1,7 @@
 package com.matin.amazingshop.core.database.di
 
 import com.matin.amazingshop.core.database.AmazingShopDatabase
-import com.matin.amazingshop.core.database.WishlistDao
+import com.matin.amazingshop.core.database.ItemStatusDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,5 +14,5 @@ object DaoModule {
 
     @Provides
     @Singleton
-    fun provideWishlistDao(database: AmazingShopDatabase): WishlistDao = database.wishlistDao()
+    fun provideWishlistDao(database: AmazingShopDatabase): ItemStatusDao = database.itemStatusDao()
 }

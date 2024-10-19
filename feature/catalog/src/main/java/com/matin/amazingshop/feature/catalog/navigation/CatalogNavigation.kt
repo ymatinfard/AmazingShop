@@ -1,20 +1,14 @@
 package com.matin.amazingshop.feature.catalog.navigation
 
-import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import com.matin.amazingshop.feature.catalog.CatalogScreen
-import com.matin.amazingshop.feature.catalog.CatalogScreenViewModel
+import com.matin.amazingshop.feature.catalog.CatalogViewModel
 
 const val CATALOG_ROUTE = "catalog_route"
 
-fun NavController.navigateToCatalog(navOptions: NavOptions) = navigate(CATALOG_ROUTE, navOptions)
-
-fun NavGraphBuilder.catalogScreen(onWishlistClick: () -> Unit) {
+fun NavGraphBuilder.catalogScreen(sharedViewModel: CatalogViewModel, onWishlistClick: () -> Unit, onItemClick: () -> Unit) {
     return composable(CATALOG_ROUTE) {
-        val viewModel = hiltViewModel<CatalogScreenViewModel>()
-        CatalogScreen(viewModel, onWishlistClick)
+        CatalogScreen(viewModel = sharedViewModel, onWishlistClick = onWishlistClick, onItemClick = onItemClick)
     }
 }

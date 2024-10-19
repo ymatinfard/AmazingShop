@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 interface AmazingShopRepository {
     fun getCatalog(): Flow<Catalog>
     fun getWishlist(): Flow<List<Item>>
-    suspend fun addToWishlist(item: Item)
-    suspend fun removeFromWishlist(item: Item)
+    fun getItemsStatus(): Flow<List<Item>>
+    suspend fun toggleWishlist(item: Item)
+    suspend fun toggleCart(item: Item)
 }

@@ -1,4 +1,4 @@
-package com.matin.amazingshop.ui.theme
+package com.matin.amazingshop.core.designsystem.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

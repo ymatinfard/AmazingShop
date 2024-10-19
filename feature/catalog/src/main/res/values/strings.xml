@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="feature_catalog_detail">Detail</string>
+    <string name="feature_catalog_new_in">NEW IN</string>
+    <string name="feature_catalog_add_to_bag">ADD TO BAG</string>
+</resources>

@@ -4,9 +4,9 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 
-@Database(entities = [WishEntity::class], version = 1)
+@Database(entities = [ItemStatusEntity::class], version = 2)
 @TypeConverters(BigDecimalTypeConvertor::class)
 abstract class AmazingShopDatabase : RoomDatabase() {
 
-    abstract fun wishlistDao(): WishlistDao
+    abstract fun itemStatusDao(): ItemStatusDao
 }

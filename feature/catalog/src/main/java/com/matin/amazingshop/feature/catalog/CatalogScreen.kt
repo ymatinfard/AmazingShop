@@ -24,6 +24,10 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -33,6 +37,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.matin.amazingshop.core.designsystem.component.Banner
 import com.matin.amazingshop.core.designsystem.component.ItemBadge
 import com.matin.amazingshop.core.designsystem.component.ItemSpec
 import com.matin.amazingshop.core.designsystem.component.TopAppBar
@@ -95,14 +100,23 @@ private fun Catalog(
     onItemClick: ClickListener,
     onWishlistClick: ClickListener
 ) {
+    var isBannerClosed by remember {
+        mutableStateOf(false)
+    }
     BoxWithConstraints(modifier = Modifier.padding(horizontal = 16.dp, vertical = 6.dp)) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            verticalArrangement = Arrangement.spacedBy(3.dp),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
-        ) {
-            items(catalog.data.items) {
-                CatalogItem(it, maxHeight = maxHeight, onItemClick, onWishlistClick)
+        val itemHeight = maxHeight / 2
+        Column {
+            if (catalog.data.banner.message.isNotEmpty() && isBannerClosed.not()) {
+                Banner(banner = catalog.data.banner) { isBannerClosed = true }
+            }
+            LazyVerticalGrid(
+                columns = GridCells.Fixed(2),
+                verticalArrangement = Arrangement.spacedBy(3.dp),
+                horizontalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                items(catalog.data.items) {
+                    CatalogItem(it, height = itemHeight, onItemClick, onWishlistClick)
+                }
             }
         }
     }
@@ -112,11 +126,11 @@ private fun Catalog(
 @Composable
 fun CatalogItem(
     item: Item,
-    maxHeight: Dp,
+    height: Dp,
     onItemClick: ClickListener,
     onWishlistClick: ClickListener,
 ) {
-    Column(modifier = Modifier.height(maxHeight / 2)) {
+    Column(modifier = Modifier.height(height)) {
         ElevatedCard(
             shape = RoundedCornerShape(2.dp),
             elevation = CardDefaults.elevatedCardElevation(8.dp),

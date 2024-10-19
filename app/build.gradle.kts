@@ -42,6 +42,7 @@ dependencies {
 
     implementation(projects.core.model)
     implementation(projects.core.data)
+    implementation(projects.core.designsystem)
     implementation(projects.feature.catalog)
     implementation(projects.feature.wishlist)
 

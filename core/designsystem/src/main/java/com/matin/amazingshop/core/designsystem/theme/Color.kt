@@ -1,4 +1,4 @@
-package com.matin.amazingshop.ui.theme
+package com.matin.amazingshop.core.designsystem.theme
 
 import androidx.compose.ui.graphics.Color
 
@@ -13,3 +13,4 @@ val Pink40 = Color(0xFF7D5260)
 val Gray95 = Color(0xFFF4F1F1)
 val Gray40 = Color(0xFF646363)
 val White = Color(0xFFFFFFFF)
+val Black = Color(0xFF030303)

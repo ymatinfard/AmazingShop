@@ -17,7 +17,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -28,12 +27,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.matin.amazingshop.core.designsystem.R.drawable.baseline_close_24
 import com.matin.amazingshop.core.designsystem.component.TopAppBar
 import com.matin.amazingshop.core.model.Item
 
@@ -41,7 +43,7 @@ typealias RemoveClickListener = (Item) -> Unit
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WishlistScreen(viewModel: WishlistViewModel, onCloseClick: () -> Unit) {
+fun WishlistScreen(viewModel: WishlistViewModel = hiltViewModel(), onCloseClick: () -> Unit) {
     val wishlistUiState = viewModel.wishlist.collectAsStateWithLifecycle()
     Column {
         TopAppBar(
@@ -51,7 +53,7 @@ fun WishlistScreen(viewModel: WishlistViewModel, onCloseClick: () -> Unit) {
             ),
             navigationIcon = null,
             navigationIconContentDescription = "",
-            actionIcon = Icons.Default.Close,
+            actionIcon = painterResource(id = baseline_close_24),
             actionIconContentDescription = "Close page",
             onActionClick = {
                 onCloseClick()

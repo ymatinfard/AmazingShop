@@ -21,12 +21,13 @@ ksp = "2.0.21-1.0.25"
 kotlinxCoroutinesAndroid = "1.7.3"
 androidxHiltNavigationCompose = "1.2.0"
 androidxLifecycle = "2.7.0"
-androidxComposeCompiler = "1.5.12"
+composeAnimation = "1.7.0-alpha07"
 androidxNavigation = "2.8.0-alpha06"
 composeMaterial3 = "1.2.1"
 room = "2.6.1"
 
 [libraries]
+accompanist-navigation-animation = { module = "androidx.compose.animation:animation", version.ref = "composeAnimation" }
 android-gradlePlugin = { group = "com.android.tools.build", name = "gradle", version.ref = "agp" }
 android-tools-common = { group = "com.android.tools", name = "common", version.ref = "androidTools" }
 coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilComposeVersion" }

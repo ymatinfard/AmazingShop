@@ -1,6 +1,9 @@
 package com.matin.amazingshop.feature.catalog
 
 import android.util.Log
+import androidx.compose.animation.AnimatedContentScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
@@ -18,13 +21,10 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.AsyncImage
+import com.matin.amazingshop.core.designsystem.R.drawable.save_item_filled_ic
 import com.matin.amazingshop.core.designsystem.component.Banner
 import com.matin.amazingshop.core.designsystem.component.ItemBadge
 import com.matin.amazingshop.core.designsystem.component.ItemSpec
@@ -50,12 +51,13 @@ import com.matin.amazingshop.core.model.Item
 
 typealias ClickListener = (Item) -> Unit
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun CatalogScreen(
     viewModel: CatalogViewModel = hiltViewModel(),
     onWishlistClick: () -> Unit = {},
-    onItemClick: () -> Unit = {}
+    onItemClick: () -> Unit = {},
+    shardTransitionScope: SharedTransitionScope, animatedVisibilityScope: AnimatedContentScope
 ) {
     val catalogState = viewModel.catalogUiState.collectAsStateWithLifecycle()
     Column(
@@ -64,27 +66,36 @@ fun CatalogScreen(
     ) {
         TopAppBar(
             title = stringResource(id = R.string.feature_catalog_new_in),
-            actionIcon = Icons.Default.Favorite,
+            actionIcon = painterResource(id = save_item_filled_ic),
             onActionClick = { onWishlistClick() },
             navigationIcon = null,
             actionIconContentDescription = "wish list",
             navigationIconContentDescription = "",
         )
 
-        CatalogScreenContent(catalogState.value, onItemClick = { item ->
-            viewModel.selectItem(item)
-            onItemClick()
-        }, onWishlistClick = { item ->
-            viewModel.onWishlistClick(item)
-        })
+        CatalogScreenContent(
+            catalogState.value,
+            onItemClick = { item ->
+                viewModel.selectItem(item)
+                onItemClick()
+            },
+            onWishlistClick = { item ->
+                viewModel.onWishlistClick(item)
+            },
+            shardTransitionScope,
+            animatedVisibilityScope,
+        )
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun CatalogScreenContent(
     catalog: CatalogUiState,
     onItemClick: ClickListener,
-    onWishlistClick: ClickListener
+    onWishlistClick: ClickListener,
+    shardTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope
 ) {
     when (catalog) {
         is CatalogUiState.Loading -> {
@@ -94,7 +105,13 @@ fun CatalogScreenContent(
         }
 
         is CatalogUiState.Success -> {
-            Catalog(catalog, onItemClick, onWishlistClick)
+            Catalog(
+                catalog,
+                onItemClick,
+                onWishlistClick,
+                shardTransitionScope,
+                animatedContentScope
+            )
         }
 
         is CatalogUiState.Error -> {
@@ -103,11 +120,14 @@ fun CatalogScreenContent(
     }
 }
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 private fun Catalog(
     catalog: CatalogUiState.Success,
     onItemClick: ClickListener,
-    onWishlistClick: ClickListener
+    onWishlistClick: ClickListener,
+    shardTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope
 ) {
     var isBannerClosed by remember {
         mutableStateOf(false)
@@ -124,61 +144,74 @@ private fun Catalog(
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 items(catalog.data.items) {
-                    CatalogItem(it, height = itemHeight, onItemClick, onWishlistClick)
+                    CatalogItem(
+                        it,
+                        height = itemHeight,
+                        onItemClick,
+                        onWishlistClick,
+                        shardTransitionScope,
+                        animatedContentScope
+                    )
                 }
             }
         }
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalLayoutApi::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun CatalogItem(
     item: Item,
     height: Dp,
     onItemClick: ClickListener,
     onWishlistClick: ClickListener,
+    shardTransitionScope: SharedTransitionScope,
+    animatedContentScope: AnimatedContentScope
 ) {
-    Column(modifier = Modifier.height(height)) {
-        ElevatedCard(
-            shape = RoundedCornerShape(2.dp),
-            elevation = CardDefaults.elevatedCardElevation(8.dp),
-            colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
-            onClick = { onItemClick(item) }
-        ) {
-            Column(modifier = Modifier.padding(8.dp)) {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(60.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-
-                    ) {
-                    FlowRow(
+    with(shardTransitionScope) {
+        Column(modifier = Modifier.height(height)) {
+            ElevatedCard(
+                shape = RoundedCornerShape(2.dp),
+                elevation = CardDefaults.elevatedCardElevation(8.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceVariant),
+                onClick = { onItemClick(item) }
+            ) {
+                Column(modifier = Modifier.padding(8.dp)) {
+                    Row(
                         modifier = Modifier
-                            .weight(1f)
-                            .wrapContentHeight()
-                    ) {
-                        item.badges.forEach {
-                            ItemBadge(text = it, MaterialTheme.typography.labelSmall)
+                            .fillMaxWidth()
+                            .height(60.dp),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+
+                        ) {
+                        FlowRow(
+                            modifier = Modifier
+                                .weight(1f)
+                                .wrapContentHeight()
+                        ) {
+                            item.badges.forEach {
+                                ItemBadge(text = it, MaterialTheme.typography.labelSmall)
+                            }
                         }
+                        WishlistIcon(item, onWishlistClick)
                     }
-                    WishlistIcon(item, onWishlistClick)
+                    AsyncImage(
+                        modifier = Modifier
+                            .height(160.dp)
+                            .padding(10.dp)
+                            .sharedElement(
+                                state = rememberSharedContentState(key = item.id),
+                                animatedVisibilityScope = animatedContentScope,
+                            ),
+                        model = item.image.url,
+                        contentScale = ContentScale.Fit,
+                        contentDescription = null,
+                        error = painterResource(id = com.matin.amazingshop.core.designsystem.R.drawable.fall_back_img)
+                    )
                 }
-
-                AsyncImage(
-                    modifier = Modifier
-                        .height(160.dp)
-                        .padding(10.dp),
-                    model = item.image.url,
-                    contentScale = ContentScale.Fit,
-                    contentDescription = null,
-                    error = painterResource(id = com.matin.amazingshop.core.designsystem.R.drawable.fall_back_img)
-                )
             }
+            Spacer(modifier = Modifier.height(20.dp))
+            ItemSpec(item)
         }
-
-        Spacer(modifier = Modifier.height(20.dp))
-        ItemSpec(item)
     }
 }

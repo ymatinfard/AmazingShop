@@ -12,4 +12,6 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     api(libs.coil3.coil.compose)
     api(libs.coil.network.okhttp)
+    implementation (libs.accompanist.navigation.animation)
+    implementation (libs.androidx.navigation.compose)
 }

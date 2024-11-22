@@ -7,6 +7,7 @@ import com.matin.amazingshop.core.model.Catalog
 import com.matin.amazingshop.core.model.Image
 import com.matin.amazingshop.core.model.Item
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.test.StandardTestDispatcher
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Test
@@ -17,10 +18,11 @@ class AmazingShopRepositoryImplTest {
     private val api = TestAmazingShopApi()
     private val dao = TestItemStatusDao()
     private lateinit var repository: AmazingShopRepository
+    private val ioDispatcher = StandardTestDispatcher()
 
     @Before
     fun setup() {
-        repository = AmazingShopRepositoryImpl(api, dao)
+        repository = AmazingShopRepositoryImpl(api, dao, ioDispatcher)
     }
 
     @Test

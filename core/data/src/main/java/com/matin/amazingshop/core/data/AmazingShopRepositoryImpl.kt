@@ -1,13 +1,17 @@
 package com.matin.amazingshop.core.data
 
+import com.matin.amazingshop.core.common.network.AmazingShopDispatcher
+import com.matin.amazingshop.core.common.network.Dispatcher
 import com.matin.amazingshop.core.database.ItemStatusDao
 import com.matin.amazingshop.core.database.toDomain
 import com.matin.amazingshop.core.database.toEntity
 import com.matin.amazingshop.core.model.Catalog
 import com.matin.amazingshop.core.model.Item
 import com.matin.amazingshop.core.network.AmazingShopApi
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
@@ -16,12 +20,13 @@ import javax.inject.Inject
 class AmazingShopRepositoryImpl @Inject constructor(
     private val api: AmazingShopApi,
     private val dao: ItemStatusDao,
+    @Dispatcher(AmazingShopDispatcher.IO) private val ioDispatcher: CoroutineDispatcher
 ) : AmazingShopRepository {
-    val mutex = Mutex()
+    private val mutex = Mutex()
 
     override fun getCatalog(): Flow<Catalog> = flow {
         emit(api.getCatalog().toDomain())
-    }
+    }.flowOn(ioDispatcher)
 
     override fun getWishlist(): Flow<List<Item>> =
         dao.getWishlist().map { it.map { it.toDomain() } }
